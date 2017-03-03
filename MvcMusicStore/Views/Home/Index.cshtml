@@ -1,0 +1,37 @@
+﻿@model List<MvcMusicStore.Models.Album>
+	@{
+		ViewBag.Title = "ASP.NET MVC Music Store";
+	}
+
+	<script type="text/javascript">
+
+		$(function () {
+			// Add Carousel plugin to rotate images
+			$(".imageSlider").jCarouselLite({
+				auto: 800,
+				speed: 800
+			});
+		});
+
+		$(function () {
+			$("input[name='viewtype']").click(function () {
+				var item = $(this);				
+				if (item.val() == "1")   //check your condition here
+				{					
+					window.location = '@Url.Action("Index", "Home")';
+				}
+				else if(item.val() == "0")
+				{					
+					window.location = '@Url.Action("ToggleViewed", "Home")';
+				}
+			});
+		});
+	</script>
+
+	@Html.Partial("PromotionPartial");
+
+	<h3><em>Fresh</em> off the grill</h3>
+	Top View: @Html.RadioButton("viewtype", "0", (int)ViewData["Option"] == 0)
+	Top Selling: @Html.RadioButton("viewtype", "1", (int)ViewData["Option"] == 1)
+
+	@Html.Partial("AlbumParitial", Model);

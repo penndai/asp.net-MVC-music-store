@@ -1,0 +1,25 @@
+﻿<div id="promotion">
+
+</div>
+<script type="text/javascript">
+	$(function () {
+		updatebackground();
+	});
+
+	setInterval(function () { updatebackground(); }, 3000);
+
+	function updatebackground()
+	{
+		$.ajax({
+			url: '@Url.Action("Promotion", "Home")',
+			type: 'POST',
+			data: {},
+			success: function (result) {
+				$("#promotion").css('background', 'url(' + result + ') no-repeat')
+			},
+			error: function (err) {
+				alert("error " + err);
+			}
+		});
+	}
+</script>
